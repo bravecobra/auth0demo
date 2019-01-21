@@ -3,15 +3,38 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Use this page to test the API</h2>
+<h2>Use this page to test the demo API</h2>
 
 <div>
-	<ul>
-		<li><a asp-controller="test" asp-action="GetAllValues">Get All Values</a></li>
-		<li><a asp-controller="test" asp-action="GetById">Get By Id</a></li>
-		<li><a asp-controller="test" asp-action="Create">Create new object</a></li>
-		<li><a asp-controller="test" asp-action="Update">Update Existing Object</a></li>
-		<li><a asp-controller="test" asp-action="Delete">Delete existing Object</a></li>
-	</ul>
+    <ul>
+        <li><a asp-controller="test" asp-action="GetAllValues">Get All Values</a></li>
+        <li><a asp-controller="test" asp-action="GetById">Get By Id</a></li>
+        <li><a asp-controller="test" asp-action="Create">Create new object</a></li>
+        <li><a asp-controller="test" asp-action="Update">Update Existing Object</a></li>
+        <li><a asp-controller="test" asp-action="Delete">Delete existing Object</a></li>
+    </ul>
 </div>
 
+<h2>Use this page to test the API of pharmacy 111222</h2>
+
+<div>
+    <ul>
+        <li><a asp-controller="test" asp-action="GetAllValues" asp-route-apb="111222">Get All Values</a></li>
+        <li><a asp-controller="test" asp-action="GetById" asp-route-apb="111222">Get By Id</a></li>
+        <li><a asp-controller="test" asp-action="Create" asp-route-apb="111222">Create new object</a></li>
+        <li><a asp-controller="test" asp-action="Update" asp-route-apb="111222">Update Existing Object</a></li>
+        <li><a asp-controller="test" asp-action="Delete" asp-route-apb="111222">Delete existing Object</a></li>
+    </ul>
+</div>
+
+<h2>Use this page to test the API of pharmacy 999999</h2>
+
+<div>
+    <ul>
+        <li><a asp-controller="test" asp-action="GetAllValues" asp-route-apb="999999">Get All Values</a></li>
+        <li><a asp-controller="test" asp-action="GetById" asp-route-apb="999999">Get By Id</a></li>
+        <li><a asp-controller="test" asp-action="Create" asp-route-apb="999999">Create new object</a></li>
+        <li><a asp-controller="test" asp-action="Update" asp-route-apb="999999">Update Existing Object</a></li>
+        <li><a asp-controller="test" asp-action="Delete" asp-route-apb="999999">Delete existing Object</a></li>
+    </ul>
+</div>

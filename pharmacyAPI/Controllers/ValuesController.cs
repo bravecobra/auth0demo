@@ -1,11 +1,14 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
-namespace Auth0DemoApi.Controllers
+namespace pharmacyAPI.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
@@ -28,7 +31,7 @@ namespace Auth0DemoApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Policy = "Guest")]
+        [Authorize(Policy = "Guest")]
         public IActionResult Get()
         {
             foreach (var dataValue in data.Values)
@@ -38,7 +41,7 @@ namespace Auth0DemoApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        //[Authorize(Policy = "Guest")]
+        [Authorize(Policy = "Guest")]
         public string Get(int id)
         {
             data.TryGetValue(id, out var value);

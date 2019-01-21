@@ -1,16 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Auth0DemoApi
+namespace pharmacyAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger<Startup> _logger;
+
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
+            _logger = logger;
             Configuration = configuration;
         }
 
@@ -33,22 +38,22 @@ namespace Auth0DemoApi
                         RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/roles"
                     };
                 });
-
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Administrator", policy =>
-                    policy
-                        .RequireAuthenticatedUser()
-                        .RequireClaim("http://schemas.microsoft.com/ws/2008/06/identity/claims/groups", "demoAPI-admin")
-                        .RequireRole("writeRole")
-                );
                 options.AddPolicy("Guest", policy =>
                     policy
                         .RequireAuthenticatedUser()
                         .RequireRole("readRole")
                 );
+                options.AddPolicy("Administrator", policy =>
+                    policy
+                        .RequireAuthenticatedUser()
+                        .RequireClaim("http://schemas.microsoft.com/ws/2008/06/identity/claims/groups",Configuration["APB"] + ":admin")
+                        .RequireRole("writeRole")
+                        );
+                _logger.LogDebug(Configuration["APB"]);
             });
         }
 
@@ -59,9 +64,14 @@ namespace Auth0DemoApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
+            app.UseHttpsRedirection();
             app.UseAuthentication();
-
             app.UseMvc();
         }
     }

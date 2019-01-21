@@ -1,4 +1,4 @@
-﻿namespace Auth0DemoApi
+﻿namespace pharmacyAPI
 {
     public class Payload
     {
